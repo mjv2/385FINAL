@@ -23,8 +23,8 @@ set_property PACKAGE_PIN V13 [get_ports gpio_usb_rst_tri_o]
 set_property PACKAGE_PIN T12 [get_ports usb_spi_ss]
 set_property IOSTANDARD LVCMOS33 [get_ports usb_spi_ss]
 
-set_property IOSTANDARD LVCMOS33 [get_ports gpio_audio_out]
-set_property PACKAGE_PIN B13 [get_ports gpio_audio_out]
+set_property -dict {PACKAGE_PIN B13 IOSTANDARD LVCMOS33} [get_ports {gpio_audio_out}]
+set_property -dict {PACKAGE_PIN B14 IOSTANDARD LVCMOS33} [get_ports {gpio_audio_out}]
 
 set_property IOSTANDARD LVCMOS25 [get_ports {hex_gridA[3]}]
 set_property IOSTANDARD LVCMOS25 [get_ports {hex_gridA[2]}]
