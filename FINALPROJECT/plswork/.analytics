@@ -1,0 +1,4 @@
+timestamp=[2024-12-14 15:58:45], mode=WORKBENCH_START, duration=0:00:03.820, duration_ms=3820, data={}
+timestamp=[2024-12-14 15:58:46], mode=WORKBENCH_UI_INIT, duration=0:00:00.264, duration_ms=264, data={editors_count=0, platform_editors_count=0, projects_count=0, platform_projects_count=0, active_platform_editor=false, projects=}
+timestamp=[2024-12-14 15:58:46], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.053, duration_ms=53, data={}
+timestamp=[2024-12-14 15:59:30], mode=APP_CREATION, duration=0:00:02.171, duration_ms=2171, data={name=mb_usb_hdmi_top, project_type=sdk, os=standalone, processor=microblaze, runtime=cpp, platform=C:\Users\Mark\Desktop\temporary\ece385\FINALPROJECT\plswork\mb_usb_hdmi_top\export\mb_usb_hdmi_top\mb_usb_hdmi_top.xpfm, application_type=application}
