@@ -150,117 +150,87 @@ module note_slice_compiler(
     
     
 
+// Note frequency lookup - moved to combinational block
 always_comb begin
     note_code = note_data[i*2 +: 2];
-    phase_acc = '0;
-    
-    sample_sum = 16'b0;
-    if (n_clk == 1) begin
-        
+    case (i)
+        28 : phase_inc = D5_i;
+        27 : phase_inc = CS5_i;
+        26 : phase_inc = C5_i;
+        25 : phase_inc = B4_i;
+        24 : phase_inc = AS4_i;
+        23 : phase_inc = A4_i;
+        22 : phase_inc = GS4_i;
+        21 : phase_inc = G4_i;
+        20 : phase_inc = FS4_i;
+        19 : phase_inc = F4_i;
+        18 : phase_inc = E4_i;
+        17 : phase_inc = DS4_i;
+        16 : phase_inc = D4_i;
+        15 : phase_inc = CS4_i;
+        14 : phase_inc = C4_i;
+        13 : phase_inc = B3_i;
+        12 : phase_inc = AS3_i;
+        11 : phase_inc = A3_i;
+        10 : phase_inc = GS3_i;
+        9  : phase_inc = G3_i;
+        8  : phase_inc = FS3_i;
+        7  : phase_inc = F3_i;
+        6  : phase_inc = E3_i;
+        5  : phase_inc = DS3_i;
+        4  : phase_inc = D3_i;
+        3  : phase_inc = CS3_i;
+        2  : phase_inc = C3_i;
+        1  : phase_inc = B2_i;
+        0  : phase_inc = AS2_i;
+        default : phase_inc = 0;
+    endcase
+end
+
+// Sample generation and accumulation
+always_ff @(posedge clk) begin
+    if (reset | !playing) begin
+        sample_sum <= '0;
+        phase_acc <= '0;
+        sum_counter <= '0;
+        output_byte <= '0;
+        is_ready <= 1'b0;
+    end
+    else if (n_clk) begin
+        // Reset accumulators at start of new sample
+        sample_sum <= '0;
+        sum_counter <= '0;
+        phase_acc <= '0;
+        is_ready <= 1'b0;
+    end
+    else begin
+        // Process one note position per clock
         if (note_code != 2'b00) begin
-            sum_counter = '0;
-            phase_acc = '0;
-            case (i)
-                    28 : begin
-                            phase_inc = D5_i;
-                            sum_counter = sum_counter+1;
-                         end
-                    27 : begin 
-                         phase_inc = CS5_i;
-                         sum_counter = sum_counter+1;
-                         end
-                    26 : begin
-                            phase_inc = C5_i;
-                            sum_counter = sum_counter+1;
-                         end
-                    25 : begin
-                            phase_inc = B4_i;
-                            sum_counter = sum_counter+1;
-                         end
-                    24 : begin
-                            phase_inc = AS4_i;
-                            sum_counter = sum_counter+1;
-                         end
-                    23 : begin
-                            phase_inc = A4_i;
-                            sum_counter = sum_counter+1;
-                         end
-                    22 : begin
-                            phase_inc = GS4_i;
-                            sum_counter = sum_counter+1; end
-                    21 : begin phase_inc = G4_i;
-                    sum_counter = sum_counter+1; end
-                    20 : begin phase_inc = FS4_i;
-                    sum_counter = sum_counter+1; end
-                    19 : begin phase_inc = F4_i;
-                    sum_counter = sum_counter+1; end
-                    18 : begin phase_inc = E4_i;
-                    sum_counter = sum_counter+1; end
-                    17 : begin phase_inc = DS4_i;
-                    sum_counter = sum_counter+1; end
-                    16 : begin phase_inc = D4_i;
-                    sum_counter = sum_counter+1; end
-                    15 : begin phase_inc = CS4_i;
-                    sum_counter = sum_counter+1; end
-                    14 : begin phase_inc = C4_i;
-                    sum_counter = sum_counter+1; end
-                    13 : begin phase_inc = B3_i;
-                    sum_counter = sum_counter+1; end
-                    12 : begin phase_inc = AS3_i;
-                    sum_counter = sum_counter+1; end
-                    11 : begin phase_inc = A3_i;
-                    sum_counter = sum_counter+1; end
-                    10 : begin phase_inc = GS3_i;
-                    sum_counter = sum_counter+1; end
-                    9  : begin phase_inc = G3_i;
-                    sum_counter = sum_counter+1; end
-                    8  : begin phase_inc = FS3_i;
-                    sum_counter = sum_counter+1; end
-                    7  : begin phase_inc = F3_i;
-                    sum_counter = sum_counter+1; end
-                    6  : begin phase_inc = E3_i;
-                    sum_counter = sum_counter+1; end
-                    5  : begin phase_inc = DS3_i;
-                    sum_counter = sum_counter+1; end
-                    4  : begin phase_inc = D3_i;
-                    sum_counter = sum_counter+1; end
-                    3  : begin phase_inc = CS3_i;
-                    sum_counter = sum_counter+1; end
-                    2  : begin phase_inc = C3_i;
-                    sum_counter = sum_counter+1; end
-                    1  : begin phase_inc = B2_i;
-                    sum_counter = sum_counter+1; end
-                    0  : begin phase_inc = AS2_i;
-                    sum_counter = sum_counter+1; end
-                    default  : phase_inc = 0;
-                endcase
-                phase_acc = phase_acc + phase_inc*j;
-                sample_sum = sample_sum + w_sample_reg[7:0];
+            // Add to phase accumulator based on note frequency
+            phase_acc <= phase_acc + (phase_inc * j);
+            // Add sample to sum
+            sample_sum <= sample_sum + w_sample_reg;
+            sum_counter <= sum_counter + 1;
         end
-        sample_sum = sample_sum / sum_counter;
-        output_byte[7:0] = sample_sum[7:0];
-        is_ready = 1;
+        
+        // When all notes processed, compute final sample
+        if (i == 5'b11111) begin
+            output_byte <= (sum_counter > 0) ? (sample_sum / sum_counter) : 8'b0;
+            is_ready <= 1'b1;
+        end
     end
 end
 
 
-    always_ff @ (posedge PWM_clk) begin
-        if(is_ready == 1'b1) begin
-            if (pwm_reset) begin
-                PWM_counter <= 8'b0;
-            end else begin
-            PWM_counter <= PWM_counter + 1;
-            end
-        end else begin
-            PWM_counter = 0;
-        end
-    end
-
-    always_comb begin
-        if ((PWM_counter < output_byte) & is_ready) begin
-            mono_out <= 1'b1;
-        end else begin
+    // Synchronous PWM generation
+    always_ff @(posedge PWM_clk) begin
+        if (reset | !playing) begin
+            PWM_counter <= '0;
             mono_out <= 1'b0;
+        end
+        else begin
+            PWM_counter <= PWM_counter + 1;
+            mono_out <= (PWM_counter < output_byte) && is_ready;
         end
     end
 
