@@ -148,9 +148,7 @@ module note_slice_compiler(
         end
     end
     
-    
 
-// Note frequency lookup - moved to combinational block
 always_comb begin
     note_code = note_data[i*2 +: 2];
     case (i)
@@ -187,7 +185,6 @@ always_comb begin
     endcase
 end
 
-// Sample generation and accumulation
 always_ff @(posedge clk) begin
     if (reset | !playing) begin
         sample_sum <= '0;
@@ -197,23 +194,18 @@ always_ff @(posedge clk) begin
         is_ready <= 1'b0;
     end
     else if (n_clk) begin
-        // Reset accumulators at start of new sample
         sample_sum <= '0;
         sum_counter <= '0;
         phase_acc <= '0;
         is_ready <= 1'b0;
     end
     else begin
-        // Process one note position per clock
         if (note_code != 2'b00) begin
-            // Add to phase accumulator based on note frequency
             phase_acc <= phase_acc + (phase_inc * j);
-            // Add sample to sum
             sample_sum <= sample_sum + w_sample_reg;
             sum_counter <= sum_counter + 1;
         end
         
-        // When all notes processed, compute final sample
         if (i == 5'b11111) begin
             output_byte <= (sum_counter > 0) ? (sample_sum / sum_counter) : 8'b0;
             is_ready <= 1'b1;
@@ -221,8 +213,6 @@ always_ff @(posedge clk) begin
     end
 end
 
-
-    // Synchronous PWM generation
     always_ff @(posedge PWM_clk) begin
         if (reset | !playing) begin
             PWM_counter <= '0;
