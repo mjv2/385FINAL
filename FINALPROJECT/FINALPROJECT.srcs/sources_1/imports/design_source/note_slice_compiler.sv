@@ -38,6 +38,43 @@ module note_slice_compiler(
     logic [7:0] output_byte;    // holds the final sample byte to be played by PWM after sum and avg
     logic [7:0] PWM_counter;    // compared  with sample to control PWM output on/off
                                 // 8 Mhz by default, tells how many 1/16th notes per second
+                                
+    // Reciprocal lookup table (fixed point 8.8 format)
+    logic [15:0] reciprocal_lut [1:32];
+    initial begin
+        reciprocal_lut[1]  = 16'h0100;  // 1.000
+        reciprocal_lut[2]  = 16'h0080;  // 0.500
+        reciprocal_lut[3]  = 16'h0055;  // 0.333
+        reciprocal_lut[4]  = 16'h0040;  // 0.250
+        reciprocal_lut[5]  = 16'h0033;  // 0.200
+        reciprocal_lut[6]  = 16'h002A;  // 0.167
+        reciprocal_lut[7]  = 16'h0024;  // 0.143
+        reciprocal_lut[8]  = 16'h0020;  // 0.125
+        reciprocal_lut[9]  = 16'h001C;  // 0.111
+        reciprocal_lut[10] = 16'h0019;  // 0.100
+        reciprocal_lut[11] = 16'h0017;  // 0.091
+        reciprocal_lut[12] = 16'h0015;  // 0.083
+        reciprocal_lut[13] = 16'h0013;  // 0.077
+        reciprocal_lut[14] = 16'h0012;  // 0.071
+        reciprocal_lut[15] = 16'h0011;  // 0.067
+        reciprocal_lut[16] = 16'h0010;  // 0.063
+        reciprocal_lut[17] = 16'h000F;  // 0.059
+        reciprocal_lut[18] = 16'h000E;  // 0.056
+        reciprocal_lut[19] = 16'h000D;  // 0.053
+        reciprocal_lut[20] = 16'h000D;  // 0.050
+        reciprocal_lut[21] = 16'h000C;  // 0.048
+        reciprocal_lut[22] = 16'h000B;  // 0.045
+        reciprocal_lut[23] = 16'h000B;  // 0.043
+        reciprocal_lut[24] = 16'h000A;  // 0.042
+        reciprocal_lut[25] = 16'h000A;  // 0.040
+        reciprocal_lut[26] = 16'h000A;  // 0.038
+        reciprocal_lut[27] = 16'h0009;  // 0.037
+        reciprocal_lut[28] = 16'h0009;  // 0.036
+        reciprocal_lut[29] = 16'h0009;  // 0.034
+        reciprocal_lut[30] = 16'h0008;  // 0.033
+        reciprocal_lut[31] = 16'h0008;  // 0.032
+        reciprocal_lut[32] = 16'h0008;  // 0.031
+    end
     //logic s_clk;                // 17 kHz sample clock, pulses high at the start of each sample every ~.06 ms for ~.03 ms
     //logic s_sync;               // used to sync for loop within note sampling block to the sample clock
     logic PWM_clk;              // 50 Mhz, used to drive the PWM for sample output
@@ -207,7 +244,7 @@ always_ff @(posedge clk) begin
         end
         
         if (i == 5'b11111) begin
-            output_byte <= (sum_counter > 0) ? (sample_sum / sum_counter) : 8'b0;
+            output_byte <= (sum_counter > 0) ? ((sample_sum * reciprocal_lut[sum_counter]) >> 8) : 8'b0;
             is_ready <= 1'b1;
         end
     end
