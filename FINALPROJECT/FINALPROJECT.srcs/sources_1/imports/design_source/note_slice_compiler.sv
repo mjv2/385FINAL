@@ -26,9 +26,13 @@ module note_slice_compiler(
     logic [7:0] D3_i = 15, CS3_i = 14, C3_i = 13, B2_i = 13, AS2_i = 12;
     
     // Wave table ROMs
-    logic [7:0] wave_sample;  // The selected sample from the ROMs
-    logic [7:0] sine_sample, square_sample, sawtooth_sample;
-    logic [11:0] rom_addr_12bit;  // 12-bit address for the ROMs
+    logic [7:0] wave_sample_1, wave_sample_2;  // The selected samples from the ROMs
+    logic [7:0] sine_sample_1, sine_sample_2;
+    logic [7:0] square_sample_1, square_sample_2;
+    logic [7:0] sawtooth_sample_1, sawtooth_sample_2;
+    logic [11:0] rom_addr_12bit_1, rom_addr_12bit_2;  // ROM addresses for each voice
+    logic [15:0] sample_acc_1, sample_acc_2;  // Separate accumulators
+    logic found_first_note;  // Flag to track first note found
     
     sine_rom sine_wave (
         .clk(clk),
@@ -124,72 +128,94 @@ module note_slice_compiler(
         end
     end
 
+    // Sample accumulation
+    always_comb begin
+        sample_acc = sample_acc_1 + sample_acc_2;
+    end
+
     always_ff @(posedge clk) begin
         if (reset || !playing) begin
             note_idx <= '0;
-            phase_acc <= '0;
-            current_sample <= 8'h80;  // Midpoint (silence)
-            sample_acc <= '0;
+            phase_acc_1 <= '0;
+            phase_acc_2 <= '0;
+            current_sample <= 8'h00;
+            sample_acc_1 <= '0;
+            sample_acc_2 <= '0;
             active_notes <= '0;
-            note_code = note_data[0 +: 2];
-            note_code_delayed <= 2'b00;
-            note_code_delayed_1 <= 2'b00;
+            note_code_1 <= 2'b00;
+            note_code_2 <= 2'b00;
+            note_code_delayed_1_1 <= 2'b00;
+            note_code_delayed_1_2 <= 2'b00;
+            found_first_note <= 0;
         end else if (sample_clk) begin
-            // Reset for new sample
             note_idx <= '0;
-            sample_acc <= '0;
+            sample_acc_1 <= '0;
+            sample_acc_2 <= '0;
             active_notes <= '0;
+            found_first_note <= 0;
         end else if (step_tick) begin
-            // Reset phase accumulator on step change
-            phase_acc <= '0;
-            
+            phase_acc_1 <= '0;
+            phase_acc_2 <= '0;
         end else begin
-            // Process one note per clock
             if (note_idx < 31) begin
-                note_code <= note_data[note_idx*2 +: 2];
-                note_code_delayed <= note_code;
-                note_code_delayed_1 <= note_code_delayed;
-                if (note_code != 2'b00) begin
-                    // Accumulate phase for this note
-                    phase_acc <= phase_acc + phase_inc;
-                    active_notes <= active_notes + 1;
+                if (note_data[note_idx*2 +: 2] != 2'b00) begin
+                    if (!found_first_note) begin
+                        note_code_1 <= note_data[note_idx*2 +: 2];
+                        note_code_delayed_1_1 <= note_code_1;
+                        phase_acc_1 <= phase_acc_1 + phase_inc;
+                        found_first_note <= 1;
+                        active_notes <= active_notes + 1;
+                    end else begin
+                        note_code_2 <= note_data[note_idx*2 +: 2];
+                        note_code_delayed_1_2 <= note_code_2;
+                        phase_acc_2 <= phase_acc_2 + phase_inc;
+                        active_notes <= active_notes + 1;
+                    end
                 end
-                if (note_code_delayed_1 != 2'b00) begin
-                    // Accumulate phase for this note
-                    sample_acc <= sample_acc + wave_sample;
+                
+                if (note_code_delayed_1_1 != 2'b00) begin
+                    sample_acc_1 <= sample_acc_1 + wave_sample_1;
                 end
+                if (note_code_delayed_1_2 != 2'b00) begin
+                    sample_acc_2 <= sample_acc_2 + wave_sample_2;
+                end
+                
                 note_idx <= note_idx + 1;
-            end
-            
-            // Update final sample
-            else begin
-                if (active_notes > 0)
-                    // current_sample <= sample_acc / active_notes;
-                    current_sample <= sample_acc;
-                else
-                    current_sample <= 8'h00;
+            end else begin
+                case (active_notes)
+                    5'd1: current_sample <= sample_acc;     // No division for single note
+                    5'd2: current_sample <= sample_acc >> 1; // Bit shift right for two notes
+                    default: current_sample <= 8'h00;       // Silence otherwise
+                endcase
             end
         end
     end
 
     // ROM addressing and wave sample selection
     always_comb begin
-        // Use phase_acc as the ROM address
-        rom_addr_12bit = phase_acc[11:0];
+        // Default assignments
+        wave_sample_1 = 8'h00;
+        wave_sample_2 = 8'h00;
         
-        // Select the appropriate waveform based on note_code
-        if (note_code_delayed_1 == 2'b01) begin
-            wave_sample = sine_sample;
-        end
-        else if (note_code_delayed_1 == 2'b10) begin
-            wave_sample = square_sample;
-        end
-        else if (note_code_delayed_1 == 2'b11) begin
-            wave_sample = sawtooth_sample;
-        end
-        else begin
-            wave_sample = 8'h00;  // Silence for note_code_delayed 2'b00
-        end
+        // ROM addresses from phase accumulators
+        rom_addr_12bit_1 = phase_acc_1[11:0];
+        rom_addr_12bit_2 = phase_acc_2[11:0];
+        
+        // First voice sample selection
+        if (note_code_delayed_1_1 == 2'b01)
+            wave_sample_1 = sine_sample_1;
+        else if (note_code_delayed_1_1 == 2'b10)
+            wave_sample_1 = square_sample_1;
+        else if (note_code_delayed_1_1 == 2'b11)
+            wave_sample_1 = sawtooth_sample_1;
+            
+        // Second voice sample selection
+        if (note_code_delayed_1_2 == 2'b01)
+            wave_sample_2 = sine_sample_2;
+        else if (note_code_delayed_1_2 == 2'b10)
+            wave_sample_2 = square_sample_2;
+        else if (note_code_delayed_1_2 == 2'b11)
+            wave_sample_2 = sawtooth_sample_2;
     end
 
     // PWM generation (direct from system clock)
