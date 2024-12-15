@@ -192,9 +192,24 @@ module testbench();
        // move_cursor(RIGHT);
         //move_cursor(DOWN);
         //move_cursor(LEFT);
+        move_cursor(DOWN);
+        move_cursor(DOWN);
+        move_cursor(DOWN);
+        move_cursor(DOWN);
+        move_cursor(DOWN);
+        move_cursor(DOWN);
+        move_cursor(DOWN);
+        move_cursor(DOWN);
+        move_cursor(DOWN);
+        move_cursor(DOWN);
+        move_cursor(DOWN);
+        move_cursor(DOWN);
+        move_cursor(DOWN);
+        move_cursor(DOWN);
+        move_cursor(DOWN);
 
         // Test note placement
-        place_instrument(3);  // Place instrument 1
+        place_instrument(1);  // Place instrument 1
 
         // Test page change
         change_page(NEXT);

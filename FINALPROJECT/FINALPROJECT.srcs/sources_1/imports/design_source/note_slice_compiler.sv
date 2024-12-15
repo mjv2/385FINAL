@@ -54,7 +54,7 @@ module note_slice_compiler(
         if (reset || !playing) begin
             sample_counter <= '0;
             sample_clk <= 0;
-        end else if (sample_counter >= 13'd2499) begin  // 2500-1, for 40kHz sample rate
+        end else if (sample_counter >= 13'd5881) begin  // 5882-1, hardcoded
             sample_counter <= '0;
             sample_clk <= 1;
         end else begin
@@ -158,7 +158,8 @@ module note_slice_compiler(
             // Update final sample
             else begin
                 if (active_notes > 0)
-                    current_sample <= sample_acc / active_notes;
+                    // current_sample <= sample_acc / active_notes;
+                    current_sample <= sample_acc;
                 else
                     current_sample <= 8'h00;
             end
