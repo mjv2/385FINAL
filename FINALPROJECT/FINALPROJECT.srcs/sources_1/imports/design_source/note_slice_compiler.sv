@@ -3,6 +3,7 @@ module note_slice_compiler(
     input logic reset,
     input logic playing,
     input logic [63:0] note_data,
+    input logic step_tick,
     output logic mono_out
 );
     
