@@ -32,20 +32,26 @@ module note_slice_compiler(
     
     sine_rom sine_wave (
         .clk(clk),
-        .addr(rom_addr_12bit),
-        .q(sine_sample)
+        .addr1(rom_addr_12bit_1),
+        .addr2(rom_addr_12bit_2),
+        .q1(sine_sample_1),
+        .q2(sine_sample_2)
     );
 
     square_rom square_wave (
         .clk(clk),
-        .addr(rom_addr_12bit),
-        .q(square_sample)
+        .addr1(rom_addr_12bit_1),
+        .addr2(rom_addr_12bit_2),
+        .q1(square_sample_1),
+        .q2(square_sample_2)
     );
 
     sawtooth_rom sawtooth_wave (
         .clk(clk),
-        .addr(rom_addr_12bit),
-        .q(sawtooth_sample)
+        .addr1(rom_addr_12bit_1),
+        .addr2(rom_addr_12bit_2),
+        .q1(sawtooth_sample_1),
+        .q2(sawtooth_sample_2)
     );
 
     // Sample clock generation (17kHz)
