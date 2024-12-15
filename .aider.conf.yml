@@ -1,0 +1,17 @@
+model: openrouter/anthropic/claude-3.5-sonnet
+
+verify-ssl: true
+
+architect: true
+
+cache-prompts: true
+
+cache-keepalive-pings: 5
+
+llm-history-file: .aider.llm.history
+
+dark-mode: true
+
+code-theme: solarized-dark
+
+subtree-only: true
