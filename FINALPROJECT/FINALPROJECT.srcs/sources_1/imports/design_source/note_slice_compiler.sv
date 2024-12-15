@@ -66,7 +66,7 @@ module note_slice_compiler(
     // Note processing
     logic [4:0] note_idx;
     logic [1:0] note_code;
-    logic [10:0] phase_acc;
+    logic [11:0] phase_acc;
     logic [6:0] phase_inc;
     logic [4:0] note_pos;
 
