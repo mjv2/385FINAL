@@ -130,3 +130,57 @@
 
 # 2024-12-15 13:04:13.546296
 +/model openrouter/anthropic/claude-3.5-sonnet
+
+# 2024-12-15 13:09:34.757513
++/map-refresh
+
+# 2024-12-15 13:09:36.808915
++/map
+
+# 2024-12-15 13:09:48.512123
++/read-only sine.sv
+
+# 2024-12-15 13:09:57.335494
++/read-only FINALPROJECT\FINALPROJECT.srcs\sources_1\imports\design_source\sine.sv
+
+# 2024-12-15 13:10:03.074100
++/read-only FINALPROJECT\FINALPROJECT.srcs\sources_1\imports\design_source\square.sv
+
+# 2024-12-15 13:10:10.877639
++/read-only FINALPROJECT\FINALPROJECT.srcs\sources_1\imports\design_source\sawtooth.sv
+
+# 2024-12-15 13:11:01.388193
++Alright, fuck the bram. I've included three files that will load 4096 samples per wave into the ROM. reimplement using those instead of the bram.
+
+# 2024-12-15 13:13:23.346329
++/add FINALPROJECT\FINALPROJECT.srcs\sources_1\imports\design_source\testbench.sv
+
+# 2024-12-15 13:13:33.525816
++/code update the testbench variables given this change
+
+# 2024-12-15 13:16:16.012713
++/ask also need to update the lookup table for the phase_inc based on the following equation: (note_freq * 4096) / 17000 (the old lookups used 2048 instead of 4096)
+
+# 2024-12-15 13:17:26.334199
++/code update the table
+
+# 2024-12-15 14:01:41.299364
++/code create a variable that is the same as note_code only updating one clock cycle later, and use that for the ROM addressing block
+
+# 2024-12-15 14:15:11.637522
++/ask i just realized that the text files are in twos complement!
+
+# 2024-12-15 14:16:26.285969
++/ask thing is we aslso need to account for 2's complement for the acc
+
+# 2024-12-15 14:17:30.823429
++/ask instead just have it convert to an unsigned number if it's negative in an alway_comb before adding
+
+# 2024-12-15 14:17:52.751286
++/code implement above
+
+# 2024-12-15 14:41:44.315181
++/git status
+
+# 2024-12-15 14:41:56.256743
++/git add -A

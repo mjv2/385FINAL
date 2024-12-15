@@ -27,7 +27,6 @@ module note_slice_compiler(
     
     // Wave table ROMs
     logic [7:0] wave_sample;  // The selected sample from the ROMs
-    logic [7:0] wave_sample_unsigned;  // Unsigned version of wave_sample
     logic [7:0] sine_sample, square_sample, sawtooth_sample;
     logic [11:0] rom_addr_12bit;  // 12-bit address for the ROMs
     
@@ -151,7 +150,7 @@ module note_slice_compiler(
                 end
                 if (note_code_delayed_1 != 2'b00) begin
                     // Accumulate phase for this note
-                    sample_acc <= sample_acc + wave_sample_unsigned;
+                    sample_acc <= sample_acc + wave_sample;
                 end
                 note_idx <= note_idx + 1;
             end
@@ -183,13 +182,6 @@ module note_slice_compiler(
         end
         else begin
             wave_sample = 8'h00;  // Silence for note_code_delayed 2'b00
-        end
-        
-        // Convert negative samples to positive
-        if (wave_sample[7]) begin
-            wave_sample_unsigned = (~wave_sample + 1'b1);
-        end else begin
-            wave_sample_unsigned = wave_sample;
         end
     end
 

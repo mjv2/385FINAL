@@ -116,7 +116,6 @@ module testbench();
     assign comp_active_notes = dut.sequencer_instance.note_slice_compiler_inst.active_notes;
     assign comp_rom_addr_12bit = dut.sequencer_instance.note_slice_compiler_inst.rom_addr_12bit;
     assign comp_wave_sample = dut.sequencer_instance.note_slice_compiler_inst.wave_sample;
-    assign comp_wave_sample_unsigned = dut.sequencer_instance.note_slice_compiler_inst.wave_sample_unsigned;
     assign comp_sine_sample = dut.sequencer_instance.note_slice_compiler_inst.sine_sample;
     assign comp_square_sample = dut.sequencer_instance.note_slice_compiler_inst.square_sample; 
     assign comp_sawtooth_sample = dut.sequencer_instance.note_slice_compiler_inst.sawtooth_sample;
@@ -195,7 +194,7 @@ module testbench();
         //move_cursor(LEFT);
 
         // Test note placement
-        place_instrument(2);  // Place instrument 1
+        place_instrument(3);  // Place instrument 1
 
         // Test page change
         change_page(NEXT);

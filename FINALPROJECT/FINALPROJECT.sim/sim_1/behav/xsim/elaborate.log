@@ -90,11 +90,9 @@ Compiling module xil_defaultlib.hdmi_tx_0_serdes_10_to_1_2
 Compiling module xil_defaultlib.hdmi_tx_0_srldelay
 Compiling module xil_defaultlib.hdmi_tx_0_hdmi_tx_v1_0
 Compiling module xil_defaultlib.hdmi_tx_0
-Compiling module blk_mem_gen_v8_4_5.blk_mem_gen_v8_4_5_output_stage(...
-Compiling module blk_mem_gen_v8_4_5.blk_mem_gen_v8_4_5_softecc_outpu...
-Compiling module blk_mem_gen_v8_4_5.blk_mem_gen_v8_4_5_mem_module(C_...
-Compiling module blk_mem_gen_v8_4_5.blk_mem_gen_v8_4_5(C_FAMILY="spa...
-Compiling module xil_defaultlib.blk_mem_gen_1
+Compiling module xil_defaultlib.sine_rom
+Compiling module xil_defaultlib.square_rom
+Compiling module xil_defaultlib.sawtooth_rom
 Compiling module xil_defaultlib.note_slice_compiler
 Compiling module xil_defaultlib.sequencer
 Compiling module xil_defaultlib.font_rom
