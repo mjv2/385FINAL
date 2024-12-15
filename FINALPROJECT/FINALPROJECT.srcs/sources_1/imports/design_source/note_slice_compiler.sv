@@ -65,7 +65,7 @@ module note_slice_compiler(
 
     // Note processing
     logic [4:0] note_idx;
-    logic [1:0] note_code;
+    logic [1:0] note_code, note_code_delayed;
     logic [11:0] phase_acc;
     logic [7:0] phase_inc;
     logic [4:0] note_pos;
@@ -126,6 +126,7 @@ module note_slice_compiler(
             sample_acc <= '0;
             active_notes <= '0;
             note_code = note_data[0 +: 2];
+            note_code_delayed <= 2'b00;
         end else if (sample_clk) begin
             // Reset for new sample
             note_idx <= '0;
@@ -139,6 +140,7 @@ module note_slice_compiler(
             // Process one note per clock
             if (note_idx < 31) begin
                 note_code = note_data[note_idx*2 +: 2];
+                note_code_delayed <= note_code;
                 if (note_code != 2'b00) begin
                     // Accumulate phase for this note
                     phase_acc <= phase_acc + phase_inc;
@@ -164,17 +166,17 @@ module note_slice_compiler(
         rom_addr_12bit = phase_acc[11:0];
         
         // Select the appropriate waveform based on note_code
-        if (note_code == 2'b01) begin
+        if (note_code_delayed == 2'b01) begin
             wave_sample = sine_sample;
         end
-        else if (note_code == 2'b10) begin
+        else if (note_code_delayed == 2'b10) begin
             wave_sample = square_sample;
         end
-        else if (note_code == 2'b11) begin
+        else if (note_code_delayed == 2'b11) begin
             wave_sample = sawtooth_sample;
         end
         else begin
-            wave_sample = 8'h80;  // Silence for note_code 2'b00
+            wave_sample = 8'h80;  // Silence for note_code_delayed 2'b00
         end
     end
 
