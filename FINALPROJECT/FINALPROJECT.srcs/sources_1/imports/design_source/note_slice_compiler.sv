@@ -20,10 +20,10 @@ module note_slice_compiler(
     logic [4:0] active_notes;
     
     // Note frequency increments
-    logic [6:0] D5_i = 142, CS5_i = 134, C5_i = 126, B4_i = 119, AS4_i = 112, A4_i = 106, GS4_i = 100, G4_i = 94;
-    logic [6:0] FS4_i = 89, F4_i = 84, E4_i = 79, DS4_i = 75, D4_i = 71, CS4_i = 67, C4_i = 63, B3_i = 60;
-    logic [6:0] AS3_i = 56, A3_i = 53, GS3_i = 50, G3_i = 47, FS3_i = 45, F3_i = 42, E3_i = 40, DS3_i = 38;
-    logic [6:0] D3_i = 35, CS3_i = 33, C3_i = 32, B2_i = 30, AS2_i = 28;
+    logic [7:0] D5_i = 142, CS5_i = 134, C5_i = 126, B4_i = 119, AS4_i = 112, A4_i = 106, GS4_i = 100, G4_i = 94;
+    logic [7:0] FS4_i = 89, F4_i = 84, E4_i = 79, DS4_i = 75, D4_i = 71, CS4_i = 67, C4_i = 63, B3_i = 60;
+    logic [7:0] AS3_i = 56, A3_i = 53, GS3_i = 50, G3_i = 47, FS3_i = 45, F3_i = 42, E3_i = 40, DS3_i = 38;
+    logic [7:0] D3_i = 35, CS3_i = 33, C3_i = 32, B2_i = 30, AS2_i = 28;
     
     // Wave table ROMs
     logic [7:0] wave_sample;  // The selected sample from the ROMs
@@ -67,7 +67,7 @@ module note_slice_compiler(
     logic [4:0] note_idx;
     logic [1:0] note_code;
     logic [11:0] phase_acc;
-    logic [6:0] phase_inc;
+    logic [7:0] phase_inc;
     logic [4:0] note_pos;
 
     // Phase increment lookup based on note position
@@ -125,6 +125,7 @@ module note_slice_compiler(
             current_sample <= 8'h80;  // Midpoint (silence)
             sample_acc <= '0;
             active_notes <= '0;
+            note_code = note_data[0 +: 2];
         end else if (sample_clk) begin
             // Reset for new sample
             note_idx <= '0;
@@ -133,6 +134,7 @@ module note_slice_compiler(
         end else if (step_tick) begin
             // Reset phase accumulator on step change
             phase_acc <= '0;
+            
         end else begin
             // Process one note per clock
             if (note_idx < 31) begin
