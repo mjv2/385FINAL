@@ -168,14 +168,14 @@ module note_slice_compiler(
                     if (!found_first_note) begin
                         note_code_1 <= note_data[note_idx*2 +: 2];
                         note_code_delayed_1_1 <= note_code_1;
-                        phase_acc_1 <= phase_acc_1 + phase_inc;
+                        phase_acc_1 <= phase_acc_1 + (phase_inc << 1); // Double the phase increment
                         found_first_note <= 1;
                         active_notes <= active_notes + 1;
                     end else if (found_first_note && !found_second_note) begin
                         
                         note_code_2 <= note_data[note_idx*2 +: 2];
                         note_code_delayed_1_2 <= note_code_2;
-                        phase_acc_2 <= phase_acc_2 + phase_inc;
+                        phase_acc_2 <= phase_acc_2 + (phase_inc << 1); // Double the phase increment
                         found_second_note <= 1;
                         active_notes <= active_notes + 1;
                     end
