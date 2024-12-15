@@ -65,7 +65,7 @@ module note_slice_compiler(
             active_notes <= '0;
         end else begin
             // Process one note per clock
-            if (note_idx < 32) begin
+            if (note_idx < 31) begin
                 note_code = note_data[note_idx*2 +: 2];
                 if (note_code != 2'b00) begin
                     sample_acc <= sample_acc + wave_sample;

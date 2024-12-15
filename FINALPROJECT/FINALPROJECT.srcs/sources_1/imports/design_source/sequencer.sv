@@ -19,7 +19,7 @@ module sequencer (
 
     // Clock divider parameters
     parameter CLOCK_HZ = 100_000_000;  // 100MHz system clock
-    parameter STEP_HZ = 4;             // Steps per second (can be adjusted for tempo)
+    parameter STEP_HZ = 8;             // Steps per second (can be adjusted for tempo)
     parameter CLOCK_DIVIDER = 12_500_000;  // Clock divider value
     
     logic [$clog2(CLOCK_DIVIDER)-1:0] clock_counter;

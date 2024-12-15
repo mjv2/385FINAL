@@ -43,25 +43,6 @@ module testbench();
     logic [5:0] note_position_sequencer;
     logic [7:0] addra_sequencer;
     
-    logic [14:0] comp_counter;
-    logic [13:0] comp_wt_addr;
-    logic [7:0] comp_w_sample_reg;
-    logic [13:0] comp_rom_data;
-    logic comp_n_clk;
-    logic [1:0] comp_note_code;
-    logic [1:0] comp_t_index;
-    logic [11:0] comp_phase_acc;
-    logic [6:0] comp_phase_inc;
-    logic [15:0] comp_sample_sum;
-    logic [4:0] comp_sum_counter;
-    logic [7:0] comp_output_byte;
-    logic [7:0] comp_PWM_counter;
-    logic comp_PWM_clk;
-    logic comp_pwm_reset;
-    logic comp_is_ready;
-    logic [11:0] comp_j;
-    logic [4:0] comp_i;
-    logic comp_mono_out;
     
     // Instantiate the sequencer_top module
     sequencer_top dut (
@@ -112,25 +93,30 @@ module testbench();
     assign note_position_sequencer      = dut.sequencer_instance.note_position;
     assign addra_sequencer              = dut.sequencer_instance.addra;
     
-    assign comp_counter                 = dut.sequencer_instance.note_slice_compiler_inst.counter;
-    assign comp_wt_addr                 = dut.sequencer_instance.note_slice_compiler_inst.wt_addr;
-    assign comp_w_sample_reg            = dut.sequencer_instance.note_slice_compiler_inst.w_sample_reg;
-    assign comp_rom_data                = dut.sequencer_instance.note_slice_compiler_inst.rom_data;
-    assign comp_n_clk                   = dut.sequencer_instance.note_slice_compiler_inst.n_clk;
-    assign comp_note_code               = dut.sequencer_instance.note_slice_compiler_inst.note_code;
-    assign comp_t_index                 = dut.sequencer_instance.note_slice_compiler_inst.t_index;
-    assign comp_phase_acc               = dut.sequencer_instance.note_slice_compiler_inst.phase_acc;
-    assign comp_phase_inc               = dut.sequencer_instance.note_slice_compiler_inst.phase_inc;
-    assign comp_sample_sum              = dut.sequencer_instance.note_slice_compiler_inst.sample_sum;
-    assign comp_sum_counter             = dut.sequencer_instance.note_slice_compiler_inst.sum_counter;
-    assign comp_output_byte             = dut.sequencer_instance.note_slice_compiler_inst.output_byte;
-    assign comp_PWM_counter             = dut.sequencer_instance.note_slice_compiler_inst.PWM_counter;
-    assign comp_PWM_clk                 = dut.sequencer_instance.note_slice_compiler_inst.PWM_clk;
-    assign comp_pwm_reset               = dut.sequencer_instance.note_slice_compiler_inst.pwm_reset;
-    assign comp_is_ready                = dut.sequencer_instance.note_slice_compiler_inst.is_ready;
-    assign comp_j                       = dut.sequencer_instance.note_slice_compiler_inst.j;
-    assign comp_i                       = dut.sequencer_instance.note_slice_compiler_inst.i;
-    assign comp_mono_out                = dut.sequencer_instance.note_slice_compiler_inst.mono_out;
+    logic [12:0] comp_sample_counter;
+    assign comp_sample_counter = dut.sequencer_instance.note_slice_compiler_inst.sample_counter;
+    logic [7:0] comp_pwm_counter;
+    assign comp_pwm_counter = dut.sequencer_instance.note_slice_compiler_inst.pwm_counter;
+    logic [7:0] comp_current_sample;
+    assign comp_current_sample = dut.sequencer_instance.note_slice_compiler_inst.current_sample;
+    logic [15:0] comp_sample_acc;
+    assign comp_sample_acc = dut.sequencer_instance.note_slice_compiler_inst.sample_acc;
+    logic [4:0] comp_active_notes;
+    assign comp_active_notes = dut.sequencer_instance.note_slice_compiler_inst.active_notes;
+    logic [13:0] comp_rom_addr, comp_rom_data;
+    assign comp_rom_addr = dut.sequencer_instance.note_slice_compiler_inst.rom_addr;
+    assign comp_rom_data = dut.sequencer_instance.note_slice_compiler_inst.rom_data;
+    logic [7:0] comp_wave_sample;
+    assign comp_wave_sample = dut.sequencer_instance.note_slice_compiler_inst.wave_sample;
+    logic comp_sample_clk;
+    assign comp_sample_clk = dut.sequencer_instance.note_slice_compiler_inst.sample_clk;
+    logic[4:0] comp_note_idx;
+    assign comp_note_idx = dut.sequencer_instance.note_slice_compiler_inst.note_idx;
+    logic [1:0] comp_note_code;
+    assign comp_note_code = dut.sequencer_instance.note_slice_compiler_inst.note_code;
+    logic [11:0] comp_phase_acc;
+    assign comp_phase_acc = dut.sequencer_instance.note_slice_compiler_inst.phase_acc;
+    
     
     // Task definitions
     typedef enum {LEFT, RIGHT, UP, DOWN} direction_t;
