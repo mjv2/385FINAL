@@ -222,12 +222,14 @@ always_comb begin
     endcase
 end
 
+logic [7:0] output_pipe;
+
 always_ff @(posedge clk) begin
     if (reset | !playing) begin
         sample_sum <= '0;
         phase_acc <= '0;
         sum_counter <= '0;
-        output_byte <= '0;
+        //output_byte <= '0;
         is_ready <= 1'b0;
     end
     else if (n_clk) begin
@@ -244,10 +246,21 @@ always_ff @(posedge clk) begin
         end
         
         if (i == 5'b11111) begin
+            // is_ready <= 1'b1;
+            output_pipe <= (sum_counter > 0) ? ((sample_sum * reciprocal_lut[sum_counter]) >> 8) : 8'b0;
+        end
+        /*
+        if (i == 5'b11111) begin
             output_byte <= (sum_counter > 0) ? ((sample_sum * reciprocal_lut[sum_counter]) >> 8) : 8'b0;
             is_ready <= 1'b1;
-        end
+        end */
     end
+end
+always_ff @(negedge n_clk) begin
+    //if (is_ready)
+        output_byte <= output_pipe;
+    //else
+        //output_byte <= '0;
 end
 
     always_ff @(posedge PWM_clk) begin
@@ -257,7 +270,7 @@ end
         end
         else begin
             PWM_counter <= PWM_counter + 1;
-            mono_out <= (PWM_counter < output_byte) && is_ready;
+            mono_out <= (PWM_counter < output_byte);// && is_ready;
         end
     end
 

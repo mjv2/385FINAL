@@ -45,6 +45,9 @@ module mb_usb_hdmi_top(
     logic reset_ah;
     logic [31:0] keycode0_gpio, keycode1_gpio;
     assign reset_ah = reset_rtl_0;
+    
+    logic audio_out;
+    
 
         //Keycode HEX drivers
     hex_driver HexA (
@@ -80,8 +83,10 @@ module mb_usb_hdmi_top(
     
     sequencer_top top_level (
         .keycode0_gpio(keycode0_gpio[7:0]),
-        .audio_out(gpio_audio_out),
+        .audio_out(audio_out),
         .*
     );
+    
+    assign gpio_audio_out = audio_out;
     
 endmodule

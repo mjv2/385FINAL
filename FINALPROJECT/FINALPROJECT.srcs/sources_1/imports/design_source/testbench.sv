@@ -13,6 +13,7 @@ module testbench();
     logic hdmi_tmds_clk_p;
     logic [2:0] hdmi_tmds_data_n;
     logic [2:0] hdmi_tmds_data_p;
+    logic gpio_audio_out;
     
     // Internal signals for monitoring
     logic [4:0] cursor_x, cursor_y, current_step;
@@ -51,7 +52,7 @@ module testbench();
     logic [1:0] comp_t_index;
     logic [11:0] comp_phase_acc;
     logic [6:0] comp_phase_inc;
-    logic [!5:0] comp_sample_sum;
+    logic [15:0] comp_sample_sum;
     logic [4:0] comp_sum_counter;
     logic [7:0] comp_output_byte;
     logic [7:0] comp_PWM_counter;
@@ -70,7 +71,8 @@ module testbench();
         .hdmi_tmds_clk_n(hdmi_tmds_clk_n),
         .hdmi_tmds_clk_p(hdmi_tmds_clk_p),
         .hdmi_tmds_data_n(hdmi_tmds_data_n),
-        .hdmi_tmds_data_p(hdmi_tmds_data_p)
+        .hdmi_tmds_data_p(hdmi_tmds_data_p),
+        .audio_out(gpio_audio_out) 
     );
     
     // Access internal signals via hierarchical references

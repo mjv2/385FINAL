@@ -36,3 +36,16 @@ timestamp=[2024-12-14 14:21:19], mode=BUILD, duration=0:00:00.103, duration_ms=1
 timestamp=[2024-12-14 14:21:23], mode=PLATFORM_GENERATION, duration=0:00:04.450, duration_ms=4450, data={name=dec_10_test}
 timestamp=[2024-12-14 14:21:25], mode=BUILD, duration=0:00:01.351, duration_ms=1351, data={name=dec_10_testapp, configuration=Debug, clean_build=false}
 timestamp=[2024-12-14 14:21:25], mode=BUILD, duration=0:00:00.110, duration_ms=110, data={name=dec_10_testapp_system, configuration=Debug, clean_build=false}
+timestamp=[2024-12-14 16:30:43], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.035, duration_ms=35, data={}
+timestamp=[2024-12-14 16:30:44], mode=WORKBENCH_START, duration=0:00:05.833, duration_ms=5833, data={}
+timestamp=[2024-12-14 16:30:45], mode=WORKBENCH_UI_INIT, duration=0:00:00.656, duration_ms=656, data={editors_count=2, platform_editors_count=0, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,dec_10_test,dec_10_testapp,dec_10_testapp_system}
+timestamp=[2024-12-14 16:31:52], mode=PLATFORM_GENERATION, duration=0:00:04.864, duration_ms=4864, data={name=dec_10_test}
+timestamp=[2024-12-14 16:31:52], mode=BUILD, duration=0:00:00.184, duration_ms=184, data={name=dec_10_testapp, configuration=Debug, clean_build=true}
+timestamp=[2024-12-14 16:31:53], mode=BUILD, duration=0:00:01.348, duration_ms=1348, data={name=dec_10_testapp, configuration=Debug, clean_build=false}
+timestamp=[2024-12-14 16:31:54], mode=BUILD, duration=0:00:00.126, duration_ms=126, data={name=dec_10_testapp_system, configuration=Debug, clean_build=false}
+timestamp=[2024-12-14 16:31:56], mode=PLATFORM_GENERATION, duration=0:00:02.321, duration_ms=2321, data={name=dec_10_test}
+timestamp=[2024-12-14 16:31:56], mode=BUILD, duration=0:00:00.109, duration_ms=109, data={name=dec_10_testapp, configuration=Debug, clean_build=true}
+timestamp=[2024-12-14 16:31:57], mode=BUILD, duration=0:00:00.106, duration_ms=106, data={name=dec_10_testapp_system, configuration=Debug, clean_build=true}
+timestamp=[2024-12-14 16:32:00], mode=PLATFORM_GENERATION, duration=0:00:03.406, duration_ms=3406, data={name=dec_10_test}
+timestamp=[2024-12-14 16:32:01], mode=BUILD, duration=0:00:01.163, duration_ms=1163, data={name=dec_10_testapp, configuration=Debug, clean_build=false}
+timestamp=[2024-12-14 16:32:02], mode=BUILD, duration=0:00:00.121, duration_ms=121, data={name=dec_10_testapp_system, configuration=Debug, clean_build=false}

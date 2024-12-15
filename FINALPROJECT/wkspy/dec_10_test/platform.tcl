@@ -30,3 +30,8 @@ platform generate
 platform config -updatehw {C:/Users/Mark/Desktop/temporary/ece385/FINALPROJECT/mb_usb_hdmi_top.xsa}
 platform clean
 platform generate
+platform active {dec_10_test}
+platform config -updatehw {C:/Users/Mark/Desktop/temporary/ece385/FINALPROJECT/mb_usb_hdmi_top.xsa}
+platform generate -domains 
+platform clean
+platform generate
