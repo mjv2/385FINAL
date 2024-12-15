@@ -49,3 +49,42 @@
 
 # 2024-12-15 00:29:11.898958
 +/git add -A
+
+# 2024-12-15 00:29:35.121213
++/git remove ../Visual Studio Code.lnk
+
+# 2024-12-15 00:29:38.564087
++git --help
+
+# 2024-12-15 00:29:45.251943
++/git --help
+
+# 2024-12-15 00:29:51.879161
++/git commit -h
+
+# 2024-12-15 00:29:58.444806
++/git add -h
+
+# 2024-12-15 00:30:25.439512
++/git commit -m "yahoo"
+
+# 2024-12-15 00:30:30.520598
++/git push
+
+# 2024-12-15 00:38:33.096492
++any issues you see with audio?
+
+# 2024-12-15 00:39:06.903264
++n
+
+# 2024-12-15 00:50:33.813995
++/ask No, the default_step_hz should stay as is. We are ONLY working on fixing the audio output so that we can hear audio. We can do tempo control later once audio is outputting.
+
+# 2024-12-15 00:52:48.998175
++Y
+
+# 2024-12-15 00:53:23.236874
++/git status
+
+# 2024-12-15 00:53:36.512212
++/git add -A
