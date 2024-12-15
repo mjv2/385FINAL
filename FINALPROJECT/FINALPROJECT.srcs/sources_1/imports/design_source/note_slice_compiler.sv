@@ -33,6 +33,7 @@ module note_slice_compiler(
     logic [11:0] rom_addr_12bit_1, rom_addr_12bit_2;  // ROM addresses for each voice
     logic [15:0] sample_acc_1, sample_acc_2;  // Separate accumulators
     logic found_first_note;  // Flag to track first note found
+    logic found_second_note;  // Flag to track second note found
     
     sine_rom sine_wave (
         .clk(clk),
@@ -148,12 +149,16 @@ module note_slice_compiler(
             note_code_delayed_1_1 <= 2'b00;
             note_code_delayed_1_2 <= 2'b00;
             found_first_note <= 0;
+            found_second_note <= 0;
         end else if (sample_clk) begin
             note_idx <= '0;
             sample_acc_1 <= '0;
             sample_acc_2 <= '0;
             active_notes <= '0;
             found_first_note <= 0;
+            found_second_note <= 0;
+            note_code_1 <= note_data[0 +: 2];
+            note_code_2 <= note_data[0 +: 2];
         end else if (step_tick) begin
             phase_acc_1 <= '0;
             phase_acc_2 <= '0;
@@ -166,12 +171,23 @@ module note_slice_compiler(
                         phase_acc_1 <= phase_acc_1 + phase_inc;
                         found_first_note <= 1;
                         active_notes <= active_notes + 1;
-                    end else begin
+                    end else if (found_first_note && !found_second_note) begin
+                        
                         note_code_2 <= note_data[note_idx*2 +: 2];
                         note_code_delayed_1_2 <= note_code_2;
                         phase_acc_2 <= phase_acc_2 + phase_inc;
+                        found_second_note <= 1;
                         active_notes <= active_notes + 1;
                     end
+                    
+                end
+                if (found_first_note) begin
+                        note_code_1 <= 0;
+                        note_code_delayed_1_1 <= note_code_1;
+                end
+                if (found_second_note) begin
+                        note_code_2 <= 0;
+                        note_code_delayed_1_2 <= note_code_2;
                 end
                 
                 if (note_code_delayed_1_1 != 2'b00) begin
