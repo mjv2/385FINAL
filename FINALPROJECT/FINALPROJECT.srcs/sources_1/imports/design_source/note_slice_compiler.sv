@@ -25,15 +25,13 @@ module note_slice_compiler(
     logic [6:0] D3_i = 18, CS3_i = 17, C3_i = 16, B2_i = 15, AS2_i = 14;
     
     // Wave table ROM
-    logic [13:0] rom_addr;
-    logic [13:0] rom_data;
+    logic [12:0] rom_addr;
     logic [7:0] wave_sample;
-    assign wave_sample = rom_data[7:0];
     
     blk_mem_gen_1 wave_rom (
         .clka(clk),
         .addra(rom_addr),
-        .douta(rom_data)
+        .douta(wave_sample)
     );
 
     // Sample clock generation (17kHz)
@@ -54,7 +52,7 @@ module note_slice_compiler(
     // Note processing
     logic [4:0] note_idx;
     logic [1:0] note_code;
-    logic [11:0] phase_acc;
+    logic [10:0] phase_acc;
     logic [6:0] phase_inc;
     logic [4:0] note_pos;
 
