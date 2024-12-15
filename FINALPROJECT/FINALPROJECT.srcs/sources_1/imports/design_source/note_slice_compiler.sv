@@ -93,7 +93,7 @@ module note_slice_compiler(
         endcase
     end
 
-    always_ff @(posedge clk) begin // AI run this at 50MHz instead of the clk 100MHz
+    always_ff @(posedge clk) begin // AI! run this at 50MHz instead of the clk 100MHz
         if (reset || !playing) begin
             note_idx <= '0;
             phase_acc <= '0;
