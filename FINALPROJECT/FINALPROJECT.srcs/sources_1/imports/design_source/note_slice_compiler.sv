@@ -115,9 +115,11 @@ module note_slice_compiler(
         end else if (sample_clk) begin
             // Reset for new sample
             note_idx <= '0;
-            phase_acc <= '0;
             sample_acc <= '0;
             active_notes <= '0;
+        end else if (step_tick) begin
+            // Reset phase accumulator on step change
+            phase_acc <= '0;
         end else begin
             // Process one note per clock
             if (note_idx < 31) begin
