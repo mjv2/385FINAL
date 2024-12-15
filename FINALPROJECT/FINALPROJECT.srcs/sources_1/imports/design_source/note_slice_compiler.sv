@@ -65,7 +65,7 @@ module note_slice_compiler(
 
     // Note processing
     logic [4:0] note_idx;
-    logic [1:0] note_code, note_code_delayed;
+    logic [1:0] note_code, note_code_delayed, note_code_delayed_1;
     logic [11:0] phase_acc;
     logic [7:0] phase_inc;
     logic [4:0] note_pos;
@@ -127,6 +127,7 @@ module note_slice_compiler(
             active_notes <= '0;
             note_code = note_data[0 +: 2];
             note_code_delayed <= 2'b00;
+            note_code_delayed_1 <= 2'b00;
         end else if (sample_clk) begin
             // Reset for new sample
             note_idx <= '0;
@@ -139,13 +140,17 @@ module note_slice_compiler(
         end else begin
             // Process one note per clock
             if (note_idx < 31) begin
-                note_code = note_data[note_idx*2 +: 2];
+                note_code <= note_data[note_idx*2 +: 2];
                 note_code_delayed <= note_code;
+                note_code_delayed_1 <= note_code_delayed;
                 if (note_code != 2'b00) begin
                     // Accumulate phase for this note
                     phase_acc <= phase_acc + phase_inc;
-                    sample_acc <= sample_acc + wave_sample;
                     active_notes <= active_notes + 1;
+                end
+                if (note_code_delayed_1 != 2'b00) begin
+                    // Accumulate phase for this note
+                    sample_acc <= sample_acc + wave_sample;
                 end
                 note_idx <= note_idx + 1;
             end
@@ -166,13 +171,13 @@ module note_slice_compiler(
         rom_addr_12bit = phase_acc[11:0];
         
         // Select the appropriate waveform based on note_code
-        if (note_code_delayed == 2'b01) begin
+        if (note_code_delayed_1 == 2'b01) begin
             wave_sample = sine_sample;
         end
-        else if (note_code_delayed == 2'b10) begin
+        else if (note_code_delayed_1 == 2'b10) begin
             wave_sample = square_sample;
         end
-        else if (note_code_delayed == 2'b11) begin
+        else if (note_code_delayed_1 == 2'b11) begin
             wave_sample = sawtooth_sample;
         end
         else begin
