@@ -75,8 +75,9 @@ module note_slice_compiler(
 
     // Note processing
     logic [4:0] note_idx;
-    logic [1:0] note_code, note_code_delayed, note_code_delayed_1;
-    logic [11:0] phase_acc;
+    logic [1:0] note_code_1, note_code_delayed_1, note_code_delayed_1_1;
+    logic [1:0] note_code_2, note_code_delayed_2, note_code_delayed_1_2;
+    logic [11:0] phase_acc_1, phase_acc_2;
     logic [7:0] phase_inc;
     logic [4:0] note_pos;
 

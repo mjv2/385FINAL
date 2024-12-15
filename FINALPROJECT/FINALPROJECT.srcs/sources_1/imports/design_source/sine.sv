@@ -3,13 +3,16 @@ for use with ECE385 course at the University of Illinois at Urbana Champaign */
 
 module sine_rom(
 input clk,
-input [11:0] addr,
-output logic [7:0] q
+input logic [11:0] addr1,
+input logic [11:0] addr2,
+output logic [7:0] q1,
+output logic [7:0] q2
 );
 
 logic [7:0] rom [4096];
 always_ff @(posedge clk) begin
-	q <= rom[addr];
+	q1 <= rom[addr1];
+	q2 <= rom[addr2];
 end
 initial begin $readmemh("sine.txt", rom); end
 endmodule

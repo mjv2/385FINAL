@@ -202,3 +202,48 @@
 
 # 2024-12-15 15:04:56.402044
 +/git add -A
+
+# 2024-12-15 15:05:12.160424
++/git commit -m "trying"
+
+# 2024-12-15 15:05:14.743862
++/git push
+
+# 2024-12-15 15:06:29.216609
++/ask how would you add polyphony to this? plan it out
+
+# 2024-12-15 15:13:20.393577
++/code update the phase inc table since we have a new frequency of 40k, according to (note_freq * 4096) / 40000
+
+# 2024-12-15 15:14:15.160687
++/git push
+
+# 2024-12-15 15:15:46.167616
++/ask go about implementing 2 note polyphony, as simply as possible. assume that the user will never place 2 notes in a column
+
+# 2024-12-15 15:17:47.027654
++/ask no, this wouldn't work correctly if say i had two notes in the upper or lower half.
+
+# 2024-12-15 15:21:27.831525
++/ask implement, but change the active notes check to not divide if active notes is 1, and to bit shift to the right by one if active notes is 2. also make a sample_acc_2 and have an always_comb adding sample_acc_1 and 2 to the original sample_acc. also, add two rom_addr variables. check sine.sv and make changes to the others and to the module insts according to the hcanges i made.
+
+# 2024-12-15 15:24:31.888849
++/code implement the listed changes
+
+# 2024-12-15 15:28:02.066317
++/code update the testbench
+
+# 2024-12-15 15:35:19.182181
++/code fix the testbench again according to the compiler
+
+# 2024-12-15 15:39:28.512842
++/git push
+
+# 2024-12-15 15:44:08.293887
++/git status
+
+# 2024-12-15 15:44:26.059987
++/git commit -A
+
+# 2024-12-15 15:44:30.487207
++/git add -A
