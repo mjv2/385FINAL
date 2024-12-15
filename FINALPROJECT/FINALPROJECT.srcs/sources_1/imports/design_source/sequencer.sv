@@ -34,7 +34,12 @@ module sequencer (
     assign note_position = {cursor_y, 1'b0};
 
     note_slice_compiler note_slice_compiler_inst(
-        .clk(clk), .playing(playing), .note_data(playback_reg), .mono_out(audio_out), .reset(reset)
+        .clk(clk),
+        .playing(playing),
+        .note_data(playback_reg),
+        .mono_out(audio_out),
+        .step_tick(step_tick),
+        .reset(reset)
     );
 
     // Main sequencer logic
