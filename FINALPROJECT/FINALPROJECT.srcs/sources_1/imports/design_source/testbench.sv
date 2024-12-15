@@ -93,29 +93,36 @@ module testbench();
     assign note_position_sequencer      = dut.sequencer_instance.note_position;
     assign addra_sequencer              = dut.sequencer_instance.addra;
     
+    // Note slice compiler monitoring signals
     logic [12:0] comp_sample_counter;
-    assign comp_sample_counter = dut.sequencer_instance.note_slice_compiler_inst.sample_counter;
     logic [7:0] comp_pwm_counter;
-    assign comp_pwm_counter = dut.sequencer_instance.note_slice_compiler_inst.pwm_counter;
     logic [7:0] comp_current_sample;
-    assign comp_current_sample = dut.sequencer_instance.note_slice_compiler_inst.current_sample;
     logic [15:0] comp_sample_acc;
-    assign comp_sample_acc = dut.sequencer_instance.note_slice_compiler_inst.sample_acc;
     logic [4:0] comp_active_notes;
-    assign comp_active_notes = dut.sequencer_instance.note_slice_compiler_inst.active_notes;
     logic [13:0] comp_rom_addr, comp_rom_data;
+    logic [7:0] comp_wave_sample;
+    logic comp_sample_clk;
+    logic [4:0] comp_note_idx;
+    logic [1:0] comp_note_code;
+    logic [11:0] comp_phase_acc;
+    logic [6:0] comp_phase_inc;
+    logic [4:0] comp_note_pos;
+    
+    // Note slice compiler signal assignments
+    assign comp_sample_counter = dut.sequencer_instance.note_slice_compiler_inst.sample_counter;
+    assign comp_pwm_counter = dut.sequencer_instance.note_slice_compiler_inst.pwm_counter;
+    assign comp_current_sample = dut.sequencer_instance.note_slice_compiler_inst.current_sample;
+    assign comp_sample_acc = dut.sequencer_instance.note_slice_compiler_inst.sample_acc;
+    assign comp_active_notes = dut.sequencer_instance.note_slice_compiler_inst.active_notes;
     assign comp_rom_addr = dut.sequencer_instance.note_slice_compiler_inst.rom_addr;
     assign comp_rom_data = dut.sequencer_instance.note_slice_compiler_inst.rom_data;
-    logic [7:0] comp_wave_sample;
     assign comp_wave_sample = dut.sequencer_instance.note_slice_compiler_inst.wave_sample;
-    logic comp_sample_clk;
     assign comp_sample_clk = dut.sequencer_instance.note_slice_compiler_inst.sample_clk;
-    logic[4:0] comp_note_idx;
     assign comp_note_idx = dut.sequencer_instance.note_slice_compiler_inst.note_idx;
-    logic [1:0] comp_note_code;
     assign comp_note_code = dut.sequencer_instance.note_slice_compiler_inst.note_code;
-    logic [11:0] comp_phase_acc;
     assign comp_phase_acc = dut.sequencer_instance.note_slice_compiler_inst.phase_acc;
+    assign comp_phase_inc = dut.sequencer_instance.note_slice_compiler_inst.phase_inc;
+    assign comp_note_pos = dut.sequencer_instance.note_slice_compiler_inst.note_pos;
     
     
     // Task definitions
