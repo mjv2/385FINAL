@@ -105,7 +105,7 @@ module note_slice_compiler(
         end
     end
 
-    always_ff @(posedge clk_50MHz) begin
+    always_ff @(posedge clk) begin
         if (reset || !playing) begin
             note_idx <= '0;
             phase_acc <= '0;
@@ -147,8 +147,13 @@ module note_slice_compiler(
     always_comb begin
         if (note_code != 2'b00) begin
             rom_addr = {note_code - 1, phase_acc};
-        end else begin
+        end 
+        else if (reset) begin
             rom_addr = '0;
+        end
+        
+        else begin
+            rom_addr = rom_addr;
         end
     end
 
