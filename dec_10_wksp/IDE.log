@@ -1,0 +1,190 @@
+15:27:10 DEBUG : Logs will be stored at 'C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/IDE.log'.
+15:27:13 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\Users\Mark\Desktop\ece385\FINALPROJECT\dec_10_wksp\temp_xsdb_launch_script.tcl
+15:27:13 INFO  : Platform repository initialization has completed.
+15:27:13 INFO  : Registering command handlers for Vitis TCF services
+15:27:16 INFO  : XSCT server has started successfully.
+15:27:18 INFO  : Successfully done setting XSCT server connection channel  
+15:27:18 INFO  : plnx-install-location is set to ''
+15:27:18 INFO  : Successfully done query RDI_DATADIR 
+15:27:18 INFO  : Successfully done setting workspace for the tool. 
+15:27:55 INFO  : Result from executing command 'getProjects': dec_10_test
+15:27:55 INFO  : Result from executing command 'getPlatforms': 
+15:27:55 WARN  : An unexpected exception occurred in the module 'platform project logging'
+15:27:55 INFO  : Platform 'dec_10_test' is added to custom repositories.
+15:27:56 INFO  : Platform 'dec_10_test' is added to custom repositories.
+15:31:33 INFO  : Result from executing command 'removePlatformRepo': 
+15:31:37 INFO  : Result from executing command 'getProjects': dec_10_test
+15:31:37 INFO  : Result from executing command 'getPlatforms': 
+15:31:37 INFO  : Checking for BSP changes to sync application flags for project 'dec_10_testapp'...
+15:35:20 INFO  : Result from executing command 'removePlatformRepo': 
+15:35:27 INFO  : Result from executing command 'getProjects': dec_10_test
+15:35:27 INFO  : Result from executing command 'getPlatforms': 
+15:35:28 INFO  : Checking for BSP changes to sync application flags for project 'dec_10_testapp'...
+15:36:38 INFO  : Result from executing command 'removePlatformRepo': 
+15:36:45 INFO  : Result from executing command 'getProjects': dec_10_test
+15:36:45 INFO  : Result from executing command 'getPlatforms': 
+15:36:46 INFO  : Checking for BSP changes to sync application flags for project 'dec_10_testapp'...
+15:37:17 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+15:37:17 INFO  : Jtag cable 'RealDigital Boo 887100000000A' is selected.
+15:37:17 INFO  : 'jtag frequency' command is executed.
+15:37:17 INFO  : 'targets -set -filter {jtag_cable_name =~ "RealDigital Boo 887100000000A" && level==0 && jtag_device_ctx=="jsn1-0362f093-0"}' command is executed.
+15:37:19 INFO  : Device configured successfully with "C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/_ide/bitstream/dec_10_test.bit"
+15:37:19 INFO  : Context for processor 'microblaze_0' is selected.
+15:37:19 INFO  : Hardware design and registers information is loaded from 'C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_test/export/dec_10_test/hw/dec_10_test.xsa'.
+15:37:19 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+15:37:19 INFO  : Context for processor 'microblaze_0' is selected.
+15:37:19 INFO  : System reset is completed.
+15:37:22 INFO  : 'after 3000' command is executed.
+15:37:22 INFO  : Context for processor 'microblaze_0' is selected.
+15:37:22 INFO  : The application 'C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/Debug/dec_10_testapp.elf' is downloaded to processor 'microblaze_0'.
+15:37:22 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "RealDigital Boo 887100000000A" && level==0 && jtag_device_ctx=="jsn1-0362f093-0"}
+fpga -file C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/_ide/bitstream/dec_10_test.bit
+targets -set -nocase -filter {name =~ "*microblaze*#0" && bscan=="USER2" }
+loadhw -hw C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_test/export/dec_10_test/hw/dec_10_test.xsa -regs
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "*microblaze*#0" && bscan=="USER2" }
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "*microblaze*#0" && bscan=="USER2" }
+dow C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/Debug/dec_10_testapp.elf
+----------------End of Script----------------
+
+15:37:22 INFO  : Context for processor 'microblaze_0' is selected.
+15:37:22 INFO  : 'con' command is executed.
+15:37:22 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*microblaze*#0" && bscan=="USER2" }
+con
+----------------End of Script----------------
+
+15:37:22 INFO  : Launch script is exported to file 'C:\Users\Mark\Desktop\ece385\FINALPROJECT\dec_10_wksp\dec_10_testapp_system\_ide\scripts\systemdebugger_dec_10_testapp_system_standalone.tcl'
+20:06:16 INFO  : Disconnected from the channel tcfchan#7.
+13:43:52 DEBUG : Logs will be stored at 'C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/IDE.log'.
+13:43:52 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\Users\Mark\Desktop\ece385\FINALPROJECT\dec_10_wksp\temp_xsdb_launch_script.tcl
+13:43:53 INFO  : Platform repository initialization has completed.
+13:43:55 INFO  : Registering command handlers for Vitis TCF services
+13:43:55 INFO  : XSCT server has started successfully.
+13:43:59 INFO  : Successfully done setting XSCT server connection channel  
+13:43:59 INFO  : plnx-install-location is set to ''
+13:43:59 INFO  : Successfully done query RDI_DATADIR 
+13:43:59 INFO  : Successfully done setting workspace for the tool. 
+13:44:06 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+13:44:06 INFO  : Jtag cable 'RealDigital Boo 887100000000A' is selected.
+13:44:06 INFO  : 'jtag frequency' command is executed.
+13:44:06 INFO  : 'targets -set -filter {jtag_cable_name =~ "RealDigital Boo 887100000000A" && level==0 && jtag_device_ctx=="jsn1-0362f093-0"}' command is executed.
+13:44:08 INFO  : Device configured successfully with "C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/_ide/bitstream/dec_10_test.bit"
+13:44:08 INFO  : Context for processor 'microblaze_0' is selected.
+13:44:08 INFO  : Hardware design and registers information is loaded from 'C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_test/export/dec_10_test/hw/dec_10_test.xsa'.
+13:44:08 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+13:44:08 INFO  : Context for processor 'microblaze_0' is selected.
+13:44:08 INFO  : System reset is completed.
+13:44:11 INFO  : 'after 3000' command is executed.
+13:44:11 INFO  : Context for processor 'microblaze_0' is selected.
+13:44:11 INFO  : The application 'C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/Debug/dec_10_testapp.elf' is downloaded to processor 'microblaze_0'.
+13:44:11 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "RealDigital Boo 887100000000A" && level==0 && jtag_device_ctx=="jsn1-0362f093-0"}
+fpga -file C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/_ide/bitstream/dec_10_test.bit
+targets -set -nocase -filter {name =~ "*microblaze*#0" && bscan=="USER2" }
+loadhw -hw C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_test/export/dec_10_test/hw/dec_10_test.xsa -regs
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "*microblaze*#0" && bscan=="USER2" }
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "*microblaze*#0" && bscan=="USER2" }
+dow C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/Debug/dec_10_testapp.elf
+----------------End of Script----------------
+
+13:44:11 INFO  : Context for processor 'microblaze_0' is selected.
+13:44:11 INFO  : 'con' command is executed.
+13:44:11 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*microblaze*#0" && bscan=="USER2" }
+con
+----------------End of Script----------------
+
+13:44:11 INFO  : Launch script is exported to file 'C:\Users\Mark\Desktop\ece385\FINALPROJECT\dec_10_wksp\dec_10_testapp_system\_ide\scripts\systemdebugger_dec_10_testapp_system_standalone.tcl'
+13:45:06 INFO  : Disconnected from the channel tcfchan#1.
+14:19:27 DEBUG : Logs will be stored at 'C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/IDE.log'.
+14:19:28 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\Users\Mark\Desktop\ece385\FINALPROJECT\dec_10_wksp\temp_xsdb_launch_script.tcl
+14:19:29 INFO  : Platform repository initialization has completed.
+14:19:30 INFO  : XSCT server has started successfully.
+14:19:30 INFO  : plnx-install-location is set to ''
+14:19:30 INFO  : Successfully done setting XSCT server connection channel  
+14:19:30 INFO  : Successfully done setting workspace for the tool. 
+14:19:30 INFO  : Successfully done query RDI_DATADIR 
+14:19:31 INFO  : Registering command handlers for Vitis TCF services
+14:19:51 INFO  : Hardware specification for platform project 'dec_10_test' is updated.
+14:19:59 INFO  : Result from executing command 'removePlatformRepo': 
+14:20:07 INFO  : Result from executing command 'getProjects': dec_10_test
+14:20:07 INFO  : Result from executing command 'getPlatforms': 
+14:20:07 INFO  : Checking for BSP changes to sync application flags for project 'dec_10_testapp'...
+14:20:10 INFO  : The hardware specification used by project 'dec_10_testapp' is out of sync with the platform. Resource files extracted from the hardware specification will be updated.
+14:20:10 INFO  : The file 'C:\Users\Mark\Desktop\ece385\FINALPROJECT\dec_10_wksp\dec_10_testapp\_ide\bitstream\dec_10_test.bit' stored in project is removed.
+14:20:10 INFO  : The file 'C:\Users\Mark\Desktop\ece385\FINALPROJECT\dec_10_wksp\dec_10_testapp\_ide\bitstream\dec_10_test.mmi' stored in project is removed.
+14:20:10 INFO  : The updated bitstream files are copied from platform to folder 'C:\Users\Mark\Desktop\ece385\FINALPROJECT\dec_10_wksp\dec_10_testapp\_ide\bitstream' in project 'dec_10_testapp'.
+14:20:28 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:20:29 INFO  : Jtag cable 'RealDigital Boo 887100000000A' is selected.
+14:20:29 INFO  : 'jtag frequency' command is executed.
+14:20:29 INFO  : 'targets -set -filter {jtag_cable_name =~ "RealDigital Boo 887100000000A" && level==0 && jtag_device_ctx=="jsn1-0362f093-0"}' command is executed.
+14:20:29 ERROR : couldn't open "C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/_ide/bitstream/dec_10_test.bit": no such file or directory
+14:20:29 ERROR : Exception occured while running Program Device.
+java.lang.RuntimeException: couldn't open "C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/_ide/bitstream/dec_10_test.bit": no such file or directory
+14:20:29 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+----------------End of Script----------------
+
+14:20:29 ERROR : couldn't open "C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/_ide/bitstream/dec_10_test.bit": no such file or directory
+14:20:54 INFO  : Hardware specification for platform project 'dec_10_test' is updated.
+14:21:18 INFO  : Result from executing command 'removePlatformRepo': 
+14:21:23 INFO  : Result from executing command 'getProjects': dec_10_test
+14:21:23 INFO  : Result from executing command 'getPlatforms': 
+14:21:23 INFO  : Checking for BSP changes to sync application flags for project 'dec_10_testapp'...
+14:21:29 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:21:29 INFO  : Jtag cable 'RealDigital Boo 887100000000A' is selected.
+14:21:29 INFO  : 'jtag frequency' command is executed.
+14:21:29 INFO  : 'targets -set -filter {jtag_cable_name =~ "RealDigital Boo 887100000000A" && level==0 && jtag_device_ctx=="jsn1-0362f093-0"}' command is executed.
+14:21:29 ERROR : couldn't open "C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/_ide/bitstream/dec_10_test.bit": no such file or directory
+14:21:29 ERROR : Exception occured while running Program Device.
+java.lang.RuntimeException: couldn't open "C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/_ide/bitstream/dec_10_test.bit": no such file or directory
+14:21:29 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+----------------End of Script----------------
+
+14:21:29 ERROR : couldn't open "C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/_ide/bitstream/dec_10_test.bit": no such file or directory
+14:22:10 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:22:10 INFO  : Jtag cable 'RealDigital Boo 887100000000A' is selected.
+14:22:10 INFO  : 'jtag frequency' command is executed.
+14:22:11 INFO  : 'targets -set -filter {jtag_cable_name =~ "RealDigital Boo 887100000000A" && level==0 && jtag_device_ctx=="jsn1-0362f093-0"}' command is executed.
+14:22:12 INFO  : Device configured successfully with "C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/_ide/bitstream/dec_10_test.bit"
+14:22:12 INFO  : Context for processor 'microblaze_0' is selected.
+14:22:12 INFO  : Hardware design and registers information is loaded from 'C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_test/export/dec_10_test/hw/mb_usb_hdmi_top.xsa'.
+14:22:12 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+14:22:12 INFO  : Context for processor 'microblaze_0' is selected.
+14:22:12 INFO  : System reset is completed.
+14:22:15 INFO  : 'after 3000' command is executed.
+14:22:15 INFO  : Context for processor 'microblaze_0' is selected.
+14:22:15 INFO  : The application 'C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/Debug/dec_10_testapp.elf' is downloaded to processor 'microblaze_0'.
+14:22:15 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "RealDigital Boo 887100000000A" && level==0 && jtag_device_ctx=="jsn1-0362f093-0"}
+fpga -file C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/_ide/bitstream/dec_10_test.bit
+targets -set -nocase -filter {name =~ "*microblaze*#0" && bscan=="USER2" }
+loadhw -hw C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_test/export/dec_10_test/hw/mb_usb_hdmi_top.xsa -regs
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "*microblaze*#0" && bscan=="USER2" }
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "*microblaze*#0" && bscan=="USER2" }
+dow C:/Users/Mark/Desktop/ece385/FINALPROJECT/dec_10_wksp/dec_10_testapp/Debug/dec_10_testapp.elf
+----------------End of Script----------------
+
+14:22:15 INFO  : Context for processor 'microblaze_0' is selected.
+14:22:15 INFO  : 'con' command is executed.
+14:22:15 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*microblaze*#0" && bscan=="USER2" }
+con
+----------------End of Script----------------
+
+14:22:15 INFO  : Launch script is exported to file 'C:\Users\Mark\Desktop\ece385\FINALPROJECT\dec_10_wksp\dec_10_testapp_system\_ide\scripts\systemdebugger_dec_10_testapp_system_standalone.tcl'
+14:23:17 INFO  : Disconnected from the channel tcfchan#3.
