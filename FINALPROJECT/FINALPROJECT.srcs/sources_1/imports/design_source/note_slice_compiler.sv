@@ -9,6 +9,11 @@ module note_slice_compiler(
     // PWM parameters
     localparam PWM_BITS = 8;
     
+    // Clock divider initialization
+    initial begin
+        clk_50MHz = 0;
+    end
+    
     // Timing counters
     logic [12:0] sample_counter;  // hardcoded for 5882
     logic [PWM_BITS-1:0] pwm_counter;
@@ -93,7 +98,13 @@ module note_slice_compiler(
         endcase
     end
 
-    always_ff @(posedge clk) begin // AI! run this at 50MHz instead of the clk 100MHz
+    // Clock divider for 50MHz operation
+    logic clk_50MHz;
+    always_ff @(posedge clk) begin
+        clk_50MHz <= ~clk_50MHz;
+    end
+
+    always_ff @(posedge clk_50MHz) begin
         if (reset || !playing) begin
             note_idx <= '0;
             phase_acc <= '0;
