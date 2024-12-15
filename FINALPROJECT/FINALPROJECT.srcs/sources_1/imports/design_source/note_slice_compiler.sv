@@ -81,6 +81,9 @@ module note_slice_compiler(
     logic pwm_reset;            // resets the PWM counter
     //logic is_perc;              // tells whether we are reading note samples from phase osc. or drum samples
     logic is_ready;             // flips high when output sample byte finishes computation
+    logic is_ready_pipe;
+    logic [7:0] output_byte_pipe;
+    logic [4:0] sum_counter_pipe;
     
     // phase increment values for accumulator note frequency shifting
     logic [6:0] D5_i = 71, CS5_i = 67, C5_i = 63, B4_i = 60, AS4_i = 56, A4_i = 53, GS4_i = 50, G4_i = 47;
@@ -263,6 +266,18 @@ always_ff @(negedge n_clk) begin
         //output_byte <= '0;
 end
 
+    always_ff @(posedge clk) begin
+        if (n_clk) begin
+            is_ready_pipe <= 0;
+            output_byte_pipe <= '0;
+            sum_counter_pipe <= '0;
+        end else begin
+            is_ready_pipe <= is_ready_pipe;
+            output_byte_pipe <= output_byte_pipe;
+            sum_counter_pipe <= sum_counter_pipe;
+        end
+    end
+
     always_ff @(posedge PWM_clk) begin
         if (reset | !playing) begin
             PWM_counter <= '0;
@@ -270,7 +285,7 @@ end
         end
         else begin
             PWM_counter <= PWM_counter + 1;
-            mono_out <= (PWM_counter < output_byte);// && is_ready;
+            mono_out <= (PWM_counter < output_byte);
         end
     end
 
