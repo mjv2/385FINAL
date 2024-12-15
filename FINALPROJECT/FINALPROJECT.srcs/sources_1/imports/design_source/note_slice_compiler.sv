@@ -25,14 +25,27 @@ module note_slice_compiler(
     logic [6:0] AS3_i = 28, A3_i = 27, GS3_i = 25, G3_i = 24, FS3_i = 22, F3_i = 21, E3_i = 20, DS3_i = 19;
     logic [6:0] D3_i = 18, CS3_i = 17, C3_i = 16, B2_i = 15, AS2_i = 14;
     
-    // Wave table ROM
-    logic [12:0] rom_addr;
-    logic [7:0] wave_sample;
+    // Wave table ROMs
+    logic [7:0] wave_sample;  // The selected sample from the ROMs
+    logic [7:0] sine_sample, square_sample, sawtooth_sample;
+    logic [11:0] rom_addr_12bit;  // 12-bit address for the ROMs
     
-    blk_mem_gen_1 wave_rom (
-        .clka(clk),
-        .addra(rom_addr),
-        .douta(wave_sample)
+    sine_rom sine_wave (
+        .clk(clk),
+        .addr(rom_addr_12bit),
+        .q(sine_sample)
+    );
+
+    square_rom square_wave (
+        .clk(clk),
+        .addr(rom_addr_12bit),
+        .q(square_sample)
+    );
+
+    sawtooth_rom sawtooth_wave (
+        .clk(clk),
+        .addr(rom_addr_12bit),
+        .q(sawtooth_sample)
     );
 
     // Sample clock generation (17kHz)
@@ -145,15 +158,21 @@ module note_slice_compiler(
 
     // ROM addressing
     always_comb begin
-        if (note_code != 2'b00) begin
-            rom_addr = {note_code - 1, phase_acc};
-        end 
-        else if (reset) begin
-            rom_addr = '0;
-        end
+        // Use phase_acc as the ROM address
+        rom_addr_12bit = phase_acc[11:0];
         
+        // Select the appropriate waveform based on note_code
+        if (note_code == 2'b01) begin
+            wave_sample = sine_sample;
+        end
+        else if (note_code == 2'b10) begin
+            wave_sample = square_sample;
+        end
+        else if (note_code == 2'b11) begin
+            wave_sample = sawtooth_sample;
+        end
         else begin
-            rom_addr = rom_addr;
+            wave_sample = 8'h80;  // Silence for note_code 2'b00
         end
     end
 
