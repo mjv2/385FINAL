@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Sun Dec 15 00:49:48 2024
+# Process ID: 18876
+# Current directory: C:/Users/Mark/Desktop/385FINAL_audio_main/FINALPROJECT/FINALPROJECT.runs/mb_block_axi_gpio_0_2_synth_1
+# Command line: vivado.exe -log mb_block_axi_gpio_0_2.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source mb_block_axi_gpio_0_2.tcl
+# Log file: C:/Users/Mark/Desktop/385FINAL_audio_main/FINALPROJECT/FINALPROJECT.runs/mb_block_axi_gpio_0_2_synth_1/mb_block_axi_gpio_0_2.vds
+# Journal file: C:/Users/Mark/Desktop/385FINAL_audio_main/FINALPROJECT/FINALPROJECT.runs/mb_block_axi_gpio_0_2_synth_1\vivado.jou
+# Running On: MarkLaptop, OS: Windows, CPU Frequency: 2304 MHz, CPU Physical cores: 8, Host memory: 34140 MB
+#-----------------------------------------------------------
+source mb_block_axi_gpio_0_2.tcl -notrace
