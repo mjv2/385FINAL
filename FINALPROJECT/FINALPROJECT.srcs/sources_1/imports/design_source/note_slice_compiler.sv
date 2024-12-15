@@ -20,10 +20,10 @@ module note_slice_compiler(
     logic [4:0] active_notes;
     
     // Note frequency increments
-    logic [7:0] D5_i = 142, CS5_i = 134, C5_i = 126, B4_i = 119, AS4_i = 112, A4_i = 106, GS4_i = 100, G4_i = 94;
-    logic [7:0] FS4_i = 89, F4_i = 84, E4_i = 79, DS4_i = 75, D4_i = 71, CS4_i = 67, C4_i = 63, B3_i = 60;
-    logic [7:0] AS3_i = 56, A3_i = 53, GS3_i = 50, G3_i = 47, FS3_i = 45, F3_i = 42, E3_i = 40, DS3_i = 38;
-    logic [7:0] D3_i = 35, CS3_i = 33, C3_i = 32, B2_i = 30, AS2_i = 28;
+    logic [7:0] D5_i = 60, CS5_i = 57, C5_i = 54, B4_i = 51, AS4_i = 48, A4_i = 45, GS4_i = 43, G4_i = 40;
+    logic [7:0] FS4_i = 38, F4_i = 36, E4_i = 34, DS4_i = 32, D4_i = 30, CS4_i = 28, C4_i = 27, B3_i = 25;
+    logic [7:0] AS3_i = 24, A3_i = 23, GS3_i = 21, G3_i = 20, FS3_i = 19, F3_i = 18, E3_i = 17, DS3_i = 16;
+    logic [7:0] D3_i = 15, CS3_i = 14, C3_i = 13, B2_i = 13, AS2_i = 12;
     
     // Wave table ROMs
     logic [7:0] wave_sample;  // The selected sample from the ROMs
