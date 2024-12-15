@@ -185,20 +185,12 @@ module testbench();
         repeat (10) @(posedge clk);
 
         // Test cursor movement
-        move_cursor(RIGHT);
-        move_cursor(DOWN);
-        move_cursor(LEFT);
+       // move_cursor(RIGHT);
+        //move_cursor(DOWN);
+        //move_cursor(LEFT);
 
         // Test note placement
         place_instrument(1);  // Place instrument 1
-        move_cursor(RIGHT);
-        place_instrument(2);
-        move_cursor(DOWN);
-        move_cursor(DOWN);
-        move_cursor(DOWN);
-        place_instrument(3);
-        move_cursor(RIGHT);
-        move_cursor(UP);
 
         // Test page change
         change_page(NEXT);

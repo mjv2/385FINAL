@@ -134,7 +134,7 @@ module note_slice_compiler(
             end
             
             // Update final sample
-            if (note_idx == 31) begin
+            else begin
                 if (active_notes > 0)
                     current_sample <= sample_acc / active_notes;
                 else
