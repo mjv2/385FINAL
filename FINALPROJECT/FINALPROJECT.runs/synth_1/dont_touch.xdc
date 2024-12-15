@@ -63,4 +63,4 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==mb_block_ax
 # IP: bd/mb_block/ip/mb_block_xlconcat_0_0/mb_block_xlconcat_0_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==mb_block_xlconcat_0_0 || ORIG_REF_NAME==mb_block_xlconcat_0_0} -quiet] -quiet
 
-# XDC: c:/Users/Mark/Desktop/385FINAL_audio_main/FINALPROJECT/FINALPROJECT.gen/sources_1/bd/mb_block/mb_block_ooc.xdc
+# XDC: c:/Users/nkubi/385FINAL/FINALPROJECT/FINALPROJECT.gen/sources_1/bd/mb_block/mb_block_ooc.xdc

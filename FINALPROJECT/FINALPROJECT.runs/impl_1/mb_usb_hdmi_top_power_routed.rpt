@@ -1,8 +1,8 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
-| Date             : Sun Dec 15 00:57:24 2024
-| Host             : MarkLaptop running 64-bit major release  (build 9200)
+| Date             : Sun Dec 15 12:54:48 2024
+| Host             : Whitney running 64-bit major release  (build 9200)
 | Command          : report_power -file mb_usb_hdmi_top_power_routed.rpt -pb mb_usb_hdmi_top_power_summary_routed.pb -rpx mb_usb_hdmi_top_power_routed.rpx
 | Design           : mb_usb_hdmi_top
 | Device           : xc7s50csga324-1
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.476        |
+| Total On-Chip Power (W)  | 0.477        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.401        |
+| Dynamic (W)              | 0.402        |
 | Device Static (W)        | 0.076        |
 | Effective TJA (C/W)      | 4.9          |
 | Max Ambient (C)          | 82.6         |
@@ -52,23 +52,22 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.015 |       12 |       --- |             --- |
-| Slice Logic              |     0.008 |     8831 |       --- |             --- |
-|   LUT as Logic           |     0.006 |     3370 |     32600 |           10.34 |
+| Clocks                   |     0.016 |       12 |       --- |             --- |
+| Slice Logic              |     0.008 |     8866 |       --- |             --- |
+|   LUT as Logic           |     0.006 |     3367 |     32600 |           10.33 |
 |   LUT as Distributed RAM |    <0.001 |      172 |      9600 |            1.79 |
 |   CARRY4                 |    <0.001 |      198 |      8150 |            2.43 |
-|   Register               |    <0.001 |     3153 |     65200 |            4.84 |
-|   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
+|   Register               |    <0.001 |     3182 |     65200 |            4.88 |
 |   F7/F8 Muxes            |    <0.001 |      171 |     32600 |            0.52 |
 |   LUT as Shift Register  |    <0.001 |      112 |      9600 |            1.17 |
-|   Others                 |     0.000 |      796 |       --- |             --- |
-| Signals                  |     0.010 |     6253 |       --- |             --- |
+|   Others                 |     0.000 |      798 |       --- |             --- |
+| Signals                  |     0.010 |     6286 |       --- |             --- |
 | Block RAM                |     0.010 |       12 |        75 |           16.00 |
 | MMCM                     |     0.212 |        2 |         5 |           40.00 |
 | DSPs                     |     0.002 |        3 |       120 |            2.50 |
-| I/O                      |     0.144 |       43 |       210 |           20.48 |
+| I/O                      |     0.145 |       43 |       210 |           20.48 |
 | Static Power             |     0.076 |          |           |                 |
-| Total                    |     0.476 |          |           |                 |
+| Total                    |     0.477 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -153,8 +152,8 @@ Table of Contents
 +--------------------------------+-----------+
 | Name                           | Power (W) |
 +--------------------------------+-----------+
-| mb_usb_hdmi_top                |     0.401 |
-|   mb_block_i                   |     0.131 |
+| mb_usb_hdmi_top                |     0.402 |
+|   mb_block_i                   |     0.132 |
 |     clk_wiz_1                  |     0.106 |
 |       inst                     |     0.106 |
 |     gpio_usb_keycode           |     0.001 |

@@ -190,7 +190,7 @@ module testbench();
         //move_cursor(LEFT);
 
         // Test note placement
-        place_instrument(1);  // Place instrument 1
+        place_instrument(2);  // Place instrument 1
 
         // Test page change
         change_page(NEXT);

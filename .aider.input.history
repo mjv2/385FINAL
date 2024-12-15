@@ -88,3 +88,45 @@
 
 # 2024-12-15 00:53:36.512212
 +/git add -A
+
+# 2024-12-15 06:28:58.214996
++n
+
+# 2024-12-15 06:29:05.095736
++/ls
+
+# 2024-12-15 06:29:13.334861
++/add FINALPROJECT\FINALPROJECT.srcs\sources_1\imports\design_source\note_slice_compiler.sv
+
+# 2024-12-15 06:34:47.294230
++/git status
+
+# 2024-12-15 06:35:13.632834
++/git add note_slice_compiler.sv
+
+# 2024-12-15 06:35:17.066757
++/git add testbench.sv
+
+# 2024-12-15 06:35:27.243041
++/git commit -m "so single note is working"
+
+# 2024-12-15 06:35:32.487402
++/git push
+
+# 2024-12-15 12:31:36.257029
++/ask for some reason on hardware all the notes make the same weird sound, although the pitches are correct
+
+# 2024-12-15 12:32:38.359470
++/ask no, the addressing isn't the issue. simulation works fine
+
+# 2024-12-15 12:51:37.439197
++/model openrouter/openai/gpt-o1-preview
+
+# 2024-12-15 12:51:50.187480
++/model openrouter/openai/o1-preview
+
+# 2024-12-15 12:54:50.178324
++/ask Our simulations look fine and the waveforms look fine, but the audio output on hardware is a weird, screechy audio sound that isn't any of the three instrumnets (and all three are the same)
+
+# 2024-12-15 13:04:13.546296
++/model openrouter/anthropic/claude-3.5-sonnet
